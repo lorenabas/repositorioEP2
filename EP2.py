@@ -7,3 +7,10 @@ def extrai_naipe(carta):
         return carta[1]
     elif carta[2] == '♦' or carta[2] == '♥' or carta[2] == '♣' or carta[2] == '♠':
         return carta[2]
+
+def extrai_valor(carta):
+    if carta[1] == '0':
+        return '10'
+    else:
+        return carta[0]
+
