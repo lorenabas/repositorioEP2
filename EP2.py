@@ -45,3 +45,16 @@ def empilha(l_baralho, p_inicial, p_final):
     l_baralho.pop(p_inicial)
 
     return l_baralho
+
+def possui_movimentos_possiveis(l_baralho):
+    soma = 0
+    for i in range(len(l_baralho)):
+        if lista_movimentos_possiveis(l_baralho, i) == []:
+            soma += 0
+        else:
+            soma += 1
+    
+    if soma > 0:
+        return True
+    else: 
+        return False
