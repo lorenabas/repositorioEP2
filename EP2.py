@@ -47,14 +47,9 @@ def empilha(l_baralho, p_inicial, p_final):
     return l_baralho
 
 def possui_movimentos_possiveis(l_baralho):
-    soma = 0
+    v_ou_f = False
     for i in range(len(l_baralho)):
-        if lista_movimentos_possiveis(l_baralho, i) == []:
-            soma += 0
-        else:
-            soma += 1
+        if lista_movimentos_possiveis(l_baralho, i) != []:
+            v_ou_f = True
     
-    if soma > 0:
-        return True
-    else: 
-        return False
+    return v_ou_f
