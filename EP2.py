@@ -2,10 +2,9 @@ import random
 print("Paciência Acordeão")
 print("===================")
 
-baralho = ['A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠', 'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥', 'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦', 'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣']
-
-#embaralha baralho --> posições que vão ser mostradas
-def baralho_mostra(l_baralho):
+#cria baralho e embaralha
+def cria_baralho():
+    l_baralho = ['A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠', 'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥', 'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦', 'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣']
     random.shuffle(l_baralho)
     return l_baralho
 
@@ -78,32 +77,40 @@ def empilha(l_baralho, p_inicial, p_final):
 
     return l_baralho
 
-
-#chama função de embaralhar baralho:
-baralho_mostra(baralho)
-
+#Jogo:
 j = 1
 while j != 0:
-    print("Situação Atual:")
-    print("-----------------")
-    sit_atual(baralho)
+    baralho = cria_baralho()
     while len(baralho) > 2:
+        print("Situação Atual:")
+        print("-----------------")
+        sit_atual(baralho)
         if possui_movimentos_possiveis(baralho):
             carta_mover = int(input("Digite a posição da carta que quer mover (1 - {}): ".format(len(baralho))))
             print("")
             if carta_movimentos_possiveis(baralho, (carta_mover-1)):
-                print("Sobre qual carta voce quer empilhar o {}? ".format(baralho[(carta_mover-1)]))
+                print("Sobre qual carta voce quer empilhar o {}? ".format(baralho[carta_mover-1]))
                 print("")
-                if lista_movimentos_possiveis(baralho, (carta_mover-1)) == [1]:
-                    print("{0}. {1}".format(1, baralho[carta_mover-2]))
-                    carta_a_empilhar = int(input("Digite o número da sua escolha (1)? "))
-                elif lista_movimentos_possiveis(baralho, (carta_mover-1)) == [3]:
-                    print("{0}. {1}".format(1, baralho[carta_mover-4]))
-                    carta_a_empilhar = int(input("Digite o número da sua escolha (1)? "))
-                elif lista_movimentos_possiveis(baralho, (carta_mover-1)) == [1,3]:
-                    print("{0}. {1}".format(1, baralho[carta_mover-2]))
-                    print("{0}. {1}".format(2, baralho[carta_mover-4]))
-                    carta_a_empilhar = int(input("Digite o número da sua escolha (1 - 2)? "))
+                while lista_movimentos_possiveis(baralho, (carta_mover-1)) != []:
+                    if lista_movimentos_possiveis(baralho, (carta_mover-1)) == [1]:
+                        print("{0}. {1}".format(1, baralho[carta_mover-1]))
+                        carta_a_empilhar = int(input("Digite o número da sua escolha (1)? "))
+                        empilha(baralho, (carta_mover-1), (carta_mover-2))
+                    elif lista_movimentos_possiveis(baralho, (carta_mover-1)) == [3]:
+                        print("{0}. {1}".format(1, baralho[carta_mover-4]))
+                        carta_a_empilhar = int(input("Digite o número da sua escolha (1)? "))
+                        empilha(baralho, (carta_mover-1), (carta_mover-4))
+                    elif lista_movimentos_possiveis(baralho, (carta_mover-1)) == [1,3]:
+                        print("{0}. {1}".format(1, baralho[carta_mover-2]))
+                        print("{0}. {1}".format(2, baralho[carta_mover-4]))
+                        carta_a_empilhar = int(input("Digite o número da sua escolha (1 - 2)? "))
+                        if carta_a_empilhar == 1:
+                            empilha(baralho, (carta_mover-1), (carta_mover-2))
+                        if carta_a_empilhar == 2:
+                            empilha(baralho, (carta_mover-1), (carta_mover-4))
+                    else:
+                        print("Você não selecionou uma opção válida de carta a empilhar.")
+                        continue
             else:
                 print("Essa carta não possui movimentos disponíveis. Selecione outra carta.")
                 print("")
@@ -111,7 +118,7 @@ while j != 0:
 
             jogar_outra_vez = input("Você quer jogar outra vez (s/n)? ")
             if jogar_outra_vez == "n":
-                j-=1
+                break
             else:
                 continue
         else:
