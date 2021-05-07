@@ -2,15 +2,19 @@ import random
 print("Paciência Acordeão")
 print("===================")
 
-def cria_baralho():
-    baralho = ['A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠', 'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥', 'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦', 'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣']
-    return baralho
+baralho = ['A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠', 'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥', 'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦', 'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣']
 
 #embaralha baralho --> posições que vão ser mostradas
-def baralho_mostra(baralho):
-    baralho_embaralhado = random.shuffle(baralho)
-    print(baralho_embaralhado)
-    return baralho_embaralhado
+def baralho_mostra(l_baralho):
+    random.shuffle(l_baralho)
+    return l_baralho
+
+#situação atual
+def sit_atual(l_baralho):
+    lista_index = []
+    for i in range(0,len(l_baralho)):
+        lista_index.append(i+1)
+        print("{0}. {1}".format(lista_index[i],l_baralho[i]))
 
 # extração do naipe da carta
 def extrai_naipe(carta):
@@ -48,7 +52,7 @@ def lista_movimentos_possiveis(lista_baralho, indice):
 
     return movimentos_possiveis
 
-# a carta selecionada possuí movimentos possíveis
+# o baralho possuí movimentos possíveis?
 def possui_movimentos_possiveis(l_baralho):
     v_ou_f = False
     for i in range(len(l_baralho)):
@@ -56,6 +60,13 @@ def possui_movimentos_possiveis(l_baralho):
             v_ou_f = True
     
     return v_ou_f
+
+# a carta selecionada possuí movimentos possíveis?
+def carta_movimentos_possiveis(l_baralho, indice):
+    if lista_movimentos_possiveis(l_baralho, indice) == []:
+        return False
+    else:
+        return True
 
 # empilhamento da carta para a posição desejada:
 def empilha(l_baralho, p_inicial, p_final):
@@ -67,4 +78,28 @@ def empilha(l_baralho, p_inicial, p_final):
 
     return l_baralho
 
-baralho_mostra(cria_baralho)
+
+#chama função de embaralhar baralho:
+baralho_mostra(baralho)
+
+j = 1
+while j != 0:
+    print("Situação Atual:")
+    sit_atual(baralho)
+    while len(baralho) > 2:
+        if possui_movimentos_possiveis(baralho):
+            carta_mover = int(input("Digite a posição da carta que quer mover (1 -{}):".format(len(baralho))))
+            print("")
+            if carta_movimentos_possiveis(baralho, (carta_mover-1)):
+                print("Sobre qual carta voce quer empilhar o {}? ".format(baralho[carta_mover]))
+                print("")
+            else:
+                print("Essa carta não possui movimentos disponíveis. Selecione outra carta.")
+                continue
+
+            jogar_outra_vez = input("Você quer jogar outra vez? (s/n)")
+        else:
+            print("Você perdeu :(")
+            jogar_outra_vez = input("Você quer jogar outra vez? (s/n)")
+            if jogar_outra_vez == "n":
+                j-=1
