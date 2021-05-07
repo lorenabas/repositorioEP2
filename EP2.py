@@ -1,19 +1,32 @@
+import random
+print("Paciência Acordeão")
+print("===================")
+
 def cria_baralho():
     baralho = ['A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠', 'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥', 'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦', 'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣']
     return baralho
 
+#embaralha baralho --> posições que vão ser mostradas
+def baralho_mostra(baralho):
+    baralho_embaralhado = random.shuffle(baralho)
+    print(baralho_embaralhado)
+    return baralho_embaralhado
+
+# extração do naipe da carta
 def extrai_naipe(carta):
     if carta[1] == '♦' or carta[1] == '♥' or carta[1] == '♣' or carta[1] == '♠':
         return carta[1]
     elif carta[2] == '♦' or carta[2] == '♥' or carta[2] == '♣' or carta[2] == '♠':
         return carta[2]
 
+# extração do valor da carta
 def extrai_valor(carta):
     if carta[1] == '0':
         return '10'
     else:
         return carta[0]
 
+#movimentos possíveis da carta selecionada
 def lista_movimentos_possiveis(lista_baralho, indice):
     movimentos_possiveis = []
     if indice != 0:
@@ -35,6 +48,7 @@ def lista_movimentos_possiveis(lista_baralho, indice):
 
     return movimentos_possiveis
 
+# a carta selecionada possuí movimentos possíveis
 def possui_movimentos_possiveis(l_baralho):
     v_ou_f = False
     for i in range(len(l_baralho)):
@@ -42,7 +56,8 @@ def possui_movimentos_possiveis(l_baralho):
             v_ou_f = True
     
     return v_ou_f
-    
+
+# empilhamento da carta para a posição desejada:
 def empilha(l_baralho, p_inicial, p_final):
     valor_inicial = l_baralho[p_inicial]
     valor_no_destino = l_baralho[p_final]
@@ -52,3 +67,4 @@ def empilha(l_baralho, p_inicial, p_final):
 
     return l_baralho
 
+baralho_mostra(cria_baralho)
