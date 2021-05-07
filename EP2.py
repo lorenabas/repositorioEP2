@@ -36,3 +36,12 @@ def lista_movimentos_possiveis(lista_baralho, indice):
                 movimentos_possiveis.append(3)
 
     return movimentos_possiveis
+
+def empilha(l_baralho, p_inicial, p_final):
+    valor_inicial = l_baralho[p_inicial]
+    valor_no_destino = l_baralho[p_final]
+
+    l_baralho[p_final] = valor_inicial
+    l_baralho.pop(p_inicial)
+
+    return l_baralho
