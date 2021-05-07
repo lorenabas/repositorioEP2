@@ -89,38 +89,57 @@ while j != 0:
             carta_mover = int(input("Digite a posição da carta que quer mover (1 - {}): ".format(len(baralho))))
             print("")
             if carta_movimentos_possiveis(baralho, (carta_mover-1)):
-                print("Sobre qual carta voce quer empilhar o {}? ".format(baralho[carta_mover-1]))
+                print("Sobre qual carta você quer empilhar o {}? ".format(baralho[(carta_mover-1)]))
                 print("")
-                while lista_movimentos_possiveis(baralho, (carta_mover-1)) != []:
+                a = True
+                while a:
                     if lista_movimentos_possiveis(baralho, (carta_mover-1)) == [1]:
-                        print("{0}. {1}".format(1, baralho[carta_mover-1]))
+                        print("{0}. {1}".format(1, baralho[carta_mover-2]))
+                        print("")
                         carta_a_empilhar = int(input("Digite o número da sua escolha (1)? "))
-                        empilha(baralho, (carta_mover-1), (carta_mover-2))
+                        print("")
+                        if carta_a_empilhar == 1:
+                            empilha(baralho, (carta_mover-1), (carta_mover-2))
+                            a = False
+                        else:
+                            print("Você não selecionou uma opção válida de carta a empilhar.")
+                            print("")
+                            continue
                     elif lista_movimentos_possiveis(baralho, (carta_mover-1)) == [3]:
                         print("{0}. {1}".format(1, baralho[carta_mover-4]))
+                        print("")
                         carta_a_empilhar = int(input("Digite o número da sua escolha (1)? "))
-                        empilha(baralho, (carta_mover-1), (carta_mover-4))
+                        print("")
+                        if carta_a_empilhar == 1:
+                            empilha(baralho, (carta_mover-1), (carta_mover-4))
+                            a = False
+                        else:
+                            print("Você não selecionou uma opção válida de carta a empilhar.")
+                            print("")
+                            continue
                     elif lista_movimentos_possiveis(baralho, (carta_mover-1)) == [1,3]:
                         print("{0}. {1}".format(1, baralho[carta_mover-2]))
                         print("{0}. {1}".format(2, baralho[carta_mover-4]))
+                        print("")
                         carta_a_empilhar = int(input("Digite o número da sua escolha (1 - 2)? "))
                         if carta_a_empilhar == 1:
                             empilha(baralho, (carta_mover-1), (carta_mover-2))
-                        if carta_a_empilhar == 2:
+                            a = False
+                            print("")
+                        elif carta_a_empilhar == 2:
                             empilha(baralho, (carta_mover-1), (carta_mover-4))
-                    else:
-                        print("Você não selecionou uma opção válida de carta a empilhar.")
-                        continue
+                            a = False
+                            print("")
+                        else:
+                            print("Você não selecionou uma opção válida de carta a empilhar.")
+                            print("")
+                            continue
+                    
             else:
                 print("Essa carta não possui movimentos disponíveis. Selecione outra carta.")
                 print("")
                 continue
 
-            jogar_outra_vez = input("Você quer jogar outra vez (s/n)? ")
-            if jogar_outra_vez == "n":
-                break
-            else:
-                continue
         else:
             print("Não há mais movimentos possíveis. Você perdeu :(")
             jogar_outra_vez = input("Você quer jogar outra vez (s/n)? ")
@@ -128,3 +147,10 @@ while j != 0:
                 j-=1
             else:
                 continue
+
+    jogar_outra_vez = input("Você quer jogar outra vez (s/n)? ")
+    if jogar_outra_vez == "n":
+        j -= 1
+    else:
+        continue
+print("Fim!")
