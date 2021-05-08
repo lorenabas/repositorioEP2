@@ -1,19 +1,15 @@
 import random
-print("Paciência Acordeão")
-print("===================")
 
 #cria baralho e embaralha
 def cria_baralho():
-    l_baralho = ['A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠', 'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥', 'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦', 'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣']
+    l_baralho = ['A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠', 'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣', 'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥', 'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦']
     random.shuffle(l_baralho)
     return l_baralho
 
 #situação atual
 def sit_atual(l_baralho):
-    lista_index = []
-    for i in range(0,len(l_baralho)):
-        lista_index.append(i+1)
-        print("{0}. {1}".format(lista_index[i],l_baralho[i]))
+    for carta in l_baralho:
+        print("{0}. {1}".format(l_baralho.index(carta) + 1, carta))
 
 # extração do naipe da carta
 def extrai_naipe(carta):
@@ -80,60 +76,50 @@ def empilha(l_baralho, p_inicial, p_final):
 #Jogo:
 j = 1
 while j != 0:
+    print("\n Paciência Acordeão")
+    print("====================\n")
     baralho = cria_baralho()
     while len(baralho) > 2:
-        print("Situação Atual:")
-        print("-----------------")
+        print(" Situação Atual:")
+        print("----------------\n")
         sit_atual(baralho)
+        print("")
         if possui_movimentos_possiveis(baralho):
-            carta_mover = int(input("Digite a posição da carta que quer mover (1 - {}): ".format(len(baralho))))
+            carta_mover = int(input("Digite a posição da carta que quer mover (1 - {}): ".format(len(baralho))))-1
             print("")
-            if carta_movimentos_possiveis(baralho, (carta_mover-1)):
-                print("Sobre qual carta você quer empilhar o {}? ".format(baralho[(carta_mover-1)]))
+            if carta_movimentos_possiveis(baralho, carta_mover):
+                print("Sobre qual carta você quer empilhar o {}? ".format(baralho[carta_mover]))
                 print("")
                 a = True
                 while a:
-                    if lista_movimentos_possiveis(baralho, (carta_mover-1)) == [1]:
-                        print("{0}. {1}".format(1, baralho[carta_mover-2]))
-                        print("")
+                    if lista_movimentos_possiveis(baralho, carta_mover) == [1]:
+                        print("{}. {}\n".format(1, baralho[carta_mover-1]))
                         carta_a_empilhar = int(input("Digite o número da sua escolha (1)? "))
                         print("")
-                        if carta_a_empilhar == 1:
-                            empilha(baralho, (carta_mover-1), (carta_mover-2))
-                            a = False
-                        else:
-                            print("Você não selecionou uma opção válida de carta a empilhar.")
-                            print("")
-                            continue
-                    elif lista_movimentos_possiveis(baralho, (carta_mover-1)) == [3]:
-                        print("{0}. {1}".format(1, baralho[carta_mover-4]))
+                        
+                    elif lista_movimentos_possiveis(baralho, carta_mover) == [3]:
+                        print("{}. {}\n".format(1, baralho[carta_mover-3]))
+                        carta_a_empilhar = int(input("Digite o número da sua escolha (1)? "))+1
                         print("")
-                        carta_a_empilhar = int(input("Digite o número da sua escolha (1)? "))
-                        print("")
-                        if carta_a_empilhar == 1:
-                            empilha(baralho, (carta_mover-1), (carta_mover-4))
-                            a = False
-                        else:
-                            print("Você não selecionou uma opção válida de carta a empilhar.")
-                            print("")
-                            continue
-                    elif lista_movimentos_possiveis(baralho, (carta_mover-1)) == [1,3]:
-                        print("{0}. {1}".format(1, baralho[carta_mover-2]))
-                        print("{0}. {1}".format(2, baralho[carta_mover-4]))
+                        
+                    elif lista_movimentos_possiveis(baralho, carta_mover) == [1,3]:
+                        print("{}. {}".format(1, baralho[carta_mover-1]))
+                        print("{}. {}\n".format(2, baralho[carta_mover-3]))
                         print("")
                         carta_a_empilhar = int(input("Digite o número da sua escolha (1 - 2)? "))
-                        if carta_a_empilhar == 1:
-                            empilha(baralho, (carta_mover-1), (carta_mover-2))
-                            a = False
-                            print("")
-                        elif carta_a_empilhar == 2:
-                            empilha(baralho, (carta_mover-1), (carta_mover-4))
-                            a = False
-                            print("")
-                        else:
-                            print("Você não selecionou uma opção válida de carta a empilhar.")
-                            print("")
-                            continue
+                        
+                    if carta_a_empilhar == 1 and (extrai_naipe(baralho[carta_mover]) == extrai_naipe(baralho[(carta_mover-1)]) or extrai_valor(baralho[carta_mover]) == extrai_valor(baralho[(carta_mover-1)])):
+                        empilha(baralho, carta_mover, (carta_mover-1))
+                        a = False
+                        print("")
+                    elif carta_a_empilhar == 2 and (extrai_naipe(baralho[carta_mover]) == extrai_naipe(baralho[(carta_mover-3)]) or extrai_valor(baralho[carta_mover]) == extrai_valor(baralho[(carta_mover-3)])):
+                        empilha(baralho, carta_mover, (carta_mover-3))
+                        a = False
+                        print("")        
+                    else:
+                        print("Você não selecionou uma opção válida de carta a empilhar.")
+                        print("")
+                        continue
                     
             else:
                 print("Essa carta não possui movimentos disponíveis. Selecione outra carta.")
