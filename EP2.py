@@ -104,30 +104,30 @@ while j != 0:
                 while a:
                     if lista_movimentos_possiveis(baralho, carta_mover) == [1]:
                         if extrai_naipe(baralho[(carta_mover-1)]) == '♥' or extrai_naipe(baralho[(carta_mover-1)]) == '♦':
-                            print("\033[37m{}. \033[31m{}\n".format(1, baralho[carta_mover-1]))
+                            print("\033[37m{0}. \033[31m{1}\n".format(1, baralho[carta_mover-1]))
                         elif extrai_naipe(baralho[(carta_mover-1)]) == '♠️' or extrai_naipe(baralho[(carta_mover-1)]) == '♣':
-                            print("\033[37m{}. \033[30m{}\n".format(1, baralho[carta_mover-1]))
-                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1)?"))
+                            print("\033[37m{0}. \033[30m{1}\n".format(1, baralho[carta_mover-1]))
+                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1):"))
                         print("")
                         
                     elif lista_movimentos_possiveis(baralho, carta_mover) == [3]:
                         if extrai_naipe(baralho[(carta_mover-3)]) == '♥' or extrai_naipe(baralho[(carta_mover-3)]) == '♦':
-                            print("\033[37m{}. \033[31m{}\n".format(1, baralho[carta_mover-3]))
+                            print("\033[37m{0}. \033[31m{1}\n".format(1, baralho[carta_mover-3]))
                         elif extrai_naipe(baralho[(carta_mover-1)]) == '♠️' or extrai_naipe(baralho[(carta_mover-1)]) == '♣':
-                            print("\033[37m{}. \033[30m{}\n".format(1, baralho[carta_mover-3]))
-                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1)?"))+1
+                            print("\033[37m{0}. \033[30m{1}\n".format(1, baralho[carta_mover-3]))
+                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1):"))+1
                         print("")
                         
                     elif lista_movimentos_possiveis(baralho, carta_mover) == [1,3]:
                         if extrai_naipe(baralho[(carta_mover-1)]) == '♥' or extrai_naipe(baralho[(carta_mover-1)]) == '♦':
-                            print("\033[37m{}. \033[31m{}".format(1, baralho[carta_mover-1]))
+                            print("\033[37m{0}. \033[31m{1}".format(1, baralho[carta_mover-1]))
                         elif extrai_naipe(baralho[(carta_mover-1)]) == '♠️' or extrai_naipe(baralho[(carta_mover-1)]) == '♣':
-                            print("\033[37m{}. \033[30m{}".format(1, baralho[carta_mover-1]))
+                            print("\033[37m{0}. \033[30m{1}".format(1, baralho[carta_mover-1]))
                         if extrai_naipe(baralho[(carta_mover-3)]) == '♥' or extrai_naipe(baralho[(carta_mover-3)]) == '♦':
-                            print("\033[37m{}. \033[31m{}\n".format(2, baralho[carta_mover-3]))
+                            print("\033[37m{0}. \033[31m{1}\n".format(2, baralho[carta_mover-3]))
                         elif extrai_naipe(baralho[(carta_mover-1)]) == '♠️' or extrai_naipe(baralho[(carta_mover-1)]) == '♣':
-                            print("\033[37m{}. \033[30m{}\n".format(2, baralho[carta_mover-3]))
-                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1 - 2)?"))
+                            print("\033[37m{0}. \033[30m{1}\n".format(2, baralho[carta_mover-3]))
+                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1 - 2):"))
                         
                     if carta_a_empilhar == 1 and (extrai_naipe(baralho[carta_mover]) == extrai_naipe(baralho[(carta_mover-1)]) or extrai_valor(baralho[carta_mover]) == extrai_valor(baralho[(carta_mover-1)])):
                         empilha(baralho, carta_mover, (carta_mover-1))
@@ -159,4 +159,4 @@ while j != 0:
         j -= 1
     else:
         continue
-print("\033[37m \nFim!")
+print("\n\033[37mFim!")
