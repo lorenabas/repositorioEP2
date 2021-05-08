@@ -1,13 +1,11 @@
 import random
-
-preto = '\033[30m'
-vermelho = '\033[31m'
+#preto = '\033[30m'
+#vermelho = '\033[31m'
 #branco = '\033[37m'
 
 #cria baralho e embaralha
 def cria_baralho():
-    #l_baralho=[preto + 'A♠️', preto +'2♠️', preto +'3♠️', preto +'4♠️', preto +'5♠️', preto +'6♠️', preto +'7♠️', preto +'8♠️', preto +'9♠️', preto +'10♠️', preto +'J♠️', preto +'Q♠️', preto +'K♠️', vermelho +'A♥️', vermelho +'2♥️', vermelho +'3♥️', vermelho +'4♥️', vermelho +'5♥️', vermelho +'6♥️', vermelho +'7♥️', vermelho +'8♥️', vermelho +'9♥️', vermelho +'10♥️', vermelho +'J♥️', vermelho +'Q♥️', vermelho +'K♥️', preto +'A♣️', preto +'2♣️', preto +'3♣️', preto +'4♣️', preto +'5♣️', preto +'6♣️', preto +'7♣️', preto +'8♣️', preto +'9♣️', preto +'10♣️', preto +'J♣️', preto +'Q♣️', preto +'K♣️', vermelho + 'A♦️', vermelho +'2♦️', vermelho +'3♦️', vermelho +'4♦️', vermelho +'5♦️', vermelho +'6♦️', vermelho +'7♦️', vermelho +'8♦️', vermelho +'9♦️', vermelho +'10♦️', vermelho +'J♦️', vermelho +'Q♦️', vermelho +'K♦️']
-    l_baralho = ['A♠️','2♠️','3♠️','4♠️','5♠️','6♠️','7♠️','8♠️','9♠️','10♠️','J♠️','Q♠️','K♠️', 'A♥️','2♥️','3♥️','4♥️','5♥️','6♥️','7♥️','8♥️','9♥️','10♥️','J♥️','Q♥️','K♥️', 'A♣️','2♣️','3♣️','4♣️','5♣️','6♣️','7♣️','8♣️','9♣️','10♣️','J♣️','Q♣️','K♣️', 'A♦️','2♦️','3♦️','4♦️','5♦️','6♦️','7♦️','8♦️','9♦️','10♦️','J♦️','Q♦️','K♦️']
+    l_baralho = ['A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠', 'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣', 'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥', 'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦']
     l_embaralhada = random.sample(l_baralho, len(l_baralho))
     return l_embaralhada
 
@@ -93,14 +91,14 @@ while j != 0:
         sit_atual(baralho)
         print("")
         if possui_movimentos_possiveis(baralho):
-            carta_mover = int(input("\033[37mDigite a posição da carta que quer mover (1 - {}): ".format(len(baralho))))-1
+            carta_mover = int(input("\033[37mDigite a posição da carta que quer mover (1 - {}):".format(len(baralho))))-1
             print("")
             if carta_movimentos_possiveis(baralho, carta_mover):
                 if extrai_naipe(baralho[carta_mover]) == '♠️' or extrai_naipe(baralho[carta_mover]) == '♣':
-                    print("\033[37mSobre qual carta você quer empilhar o \033[30m{}\033[37m? ".format(baralho[carta_mover]))
+                    print("\033[37mSobre qual carta você quer empilhar o \033[30m{}\033[37m?".format(baralho[carta_mover]))
                     print("")
                 elif extrai_naipe(baralho[carta_mover]) == '♥' or extrai_naipe(baralho[carta_mover]) == '♦':
-                    print("\033[37mSobre qual carta você quer empilhar o \033[31m{}\033[37m? ".format(baralho[carta_mover]))
+                    print("\033[37mSobre qual carta você quer empilhar o \033[31m{}\033[37m?".format(baralho[carta_mover]))
                     print("")
                 a = True
                 while a:
@@ -109,7 +107,7 @@ while j != 0:
                             print("\033[37m{}. \033[31m{}\n".format(1, baralho[carta_mover-1]))
                         elif extrai_naipe(baralho[(carta_mover-1)]) == '♠️' or extrai_naipe(baralho[(carta_mover-1)]) == '♣':
                             print("\033[37m{}. \033[30m{}\n".format(1, baralho[carta_mover-1]))
-                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1)? "))
+                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1)?"))
                         print("")
                         
                     elif lista_movimentos_possiveis(baralho, carta_mover) == [3]:
@@ -117,7 +115,7 @@ while j != 0:
                             print("\033[37m{}. \033[31m{}\n".format(1, baralho[carta_mover-3]))
                         elif extrai_naipe(baralho[(carta_mover-1)]) == '♠️' or extrai_naipe(baralho[(carta_mover-1)]) == '♣':
                             print("\033[37m{}. \033[30m{}\n".format(1, baralho[carta_mover-3]))
-                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1)? "))+1
+                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1)?"))+1
                         print("")
                         
                     elif lista_movimentos_possiveis(baralho, carta_mover) == [1,3]:
@@ -126,10 +124,10 @@ while j != 0:
                         elif extrai_naipe(baralho[(carta_mover-1)]) == '♠️' or extrai_naipe(baralho[(carta_mover-1)]) == '♣':
                             print("\033[37m{}. \033[30m{}".format(1, baralho[carta_mover-1]))
                         if extrai_naipe(baralho[(carta_mover-3)]) == '♥' or extrai_naipe(baralho[(carta_mover-3)]) == '♦':
-                            print("\033[37m{}. \033[31m{}\n".format(1, baralho[carta_mover-3]))
+                            print("\033[37m{}. \033[31m{}\n".format(2, baralho[carta_mover-3]))
                         elif extrai_naipe(baralho[(carta_mover-1)]) == '♠️' or extrai_naipe(baralho[(carta_mover-1)]) == '♣':
-                            print("\033[37m{}. \033[30m{}\n".format(1, baralho[carta_mover-3]))
-                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1 - 2)? "))
+                            print("\033[37m{}. \033[30m{}\n".format(2, baralho[carta_mover-3]))
+                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1 - 2)?"))
                         
                     if carta_a_empilhar == 1 and (extrai_naipe(baralho[carta_mover]) == extrai_naipe(baralho[(carta_mover-1)]) or extrai_valor(baralho[carta_mover]) == extrai_valor(baralho[(carta_mover-1)])):
                         empilha(baralho, carta_mover, (carta_mover-1))
@@ -149,14 +147,14 @@ while j != 0:
 
         else:
             print("\033[37mNão há mais movimentos possíveis. Você perdeu :(\n")
-            jogar_outra_vez = input("\033[37m Você quer jogar outra vez (s/n)? ")
+            jogar_outra_vez = input("\033[37m Você quer jogar outra vez (s/n)?")
             if jogar_outra_vez == "n":
                 j-=1
             else:
                 continue
 
     print("\033[37m Você Ganhou!!!!!\n")
-    jogar_outra_vez = input("\033[37m Você quer jogar outra vez (s/n)? ")
+    jogar_outra_vez = input("\033[37m Você quer jogar outra vez (s/n)?")
     if jogar_outra_vez == "n":
         j -= 1
     else:
