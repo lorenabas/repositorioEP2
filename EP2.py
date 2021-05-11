@@ -85,7 +85,7 @@ while j != 0:
     print("\033[37m\n Paciência Acordeão")
     print("\033[37m====================\n")
     baralho = cria_baralho()
-    while len(baralho) > 2:
+    while len(baralho) > 1:
         print("\033[37m Situação Atual:")
         print("\033[37m----------------\n")
         sit_atual(baralho)
@@ -129,11 +129,11 @@ while j != 0:
                             print("\033[37m{0}. \033[30m{1}\n".format(2, baralho[carta_mover-3]))
                         carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1 - 2):"))
                         
-                    if carta_a_empilhar == 1 and (extrai_naipe(baralho[carta_mover]) == extrai_naipe(baralho[(carta_mover-1)]) or extrai_valor(baralho[carta_mover]) == extrai_valor(baralho[(carta_mover-1)])):
+                    if carta_a_empilhar == 1 and ((extrai_naipe(baralho[carta_mover]) == extrai_naipe(baralho[(carta_mover-1)])) or (extrai_valor(baralho[carta_mover]) == extrai_valor(baralho[(carta_mover-1)]))):
                         empilha(baralho, carta_mover, (carta_mover-1))
                         a = False
                         print("")
-                    elif carta_a_empilhar == 2 and (extrai_naipe(baralho[carta_mover]) == extrai_naipe(baralho[(carta_mover-3)]) or extrai_valor(baralho[carta_mover]) == extrai_valor(baralho[(carta_mover-3)])):
+                    elif carta_a_empilhar == 2 and ((extrai_naipe(baralho[carta_mover]) == extrai_naipe(baralho[(carta_mover-3)])) or (extrai_valor(baralho[carta_mover]) == extrai_valor(baralho[(carta_mover-3)]))):
                         empilha(baralho, carta_mover, (carta_mover-3))
                         a = False
                         print("")        
@@ -151,9 +151,9 @@ while j != 0:
             if jogar_outra_vez == "n":
                 j-=1
             else:
-                continue
+                quit
 
-    print("\033[37m Você Ganhou!!!!!\n")
+    print("\033[37m Você Ganhou!!\n")
     jogar_outra_vez = input("\033[37m Você quer jogar outra vez (s/n)?")
     if jogar_outra_vez == "n":
         j -= 1
