@@ -80,8 +80,8 @@ def empilha(l_baralho, p_inicial, p_final):
     return l_baralho
 
 #Jogo:
-j = 1
-while j != 0:
+j = 0
+while j == 0:
     print("\033[37m\n Paciência Acordeão")
     print("\033[37m====================\n")
     baralho = cria_baralho()
@@ -98,7 +98,7 @@ while j != 0:
                     print("\033[37mSobre qual carta você quer empilhar o \033[30m{}\033[37m?".format(baralho[carta_mover]))
                     print("")
                 elif extrai_naipe(baralho[carta_mover]) == '♥' or extrai_naipe(baralho[carta_mover]) == '♦':
-                    print("\033[37mSobre qual carta você quer empilhar o \033[31m{}\033[37m?".format(baralho[carta_mover]))
+                    print("\033[37mCartas possíveis para empilhar \033[31m{}\033[37m?".format(baralho[carta_mover]))
                     print("")
                 a = True
                 while a:
@@ -107,16 +107,14 @@ while j != 0:
                             print("\033[37m{0}. \033[31m{1}\n".format(1, baralho[carta_mover-1]))
                         elif extrai_naipe(baralho[(carta_mover-1)]) == '♠️' or extrai_naipe(baralho[(carta_mover-1)]) == '♣':
                             print("\033[37m{0}. \033[30m{1}\n".format(1, baralho[carta_mover-1]))
-                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1):"))
-                        print("")
-                        
+                        carta_a_empilhar = 1
+
                     elif lista_movimentos_possiveis(baralho, carta_mover) == [3]:
                         if extrai_naipe(baralho[(carta_mover-3)]) == '♥' or extrai_naipe(baralho[(carta_mover-3)]) == '♦':
                             print("\033[37m{0}. \033[31m{1}\n".format(1, baralho[carta_mover-3]))
                         elif extrai_naipe(baralho[(carta_mover-1)]) == '♠️' or extrai_naipe(baralho[(carta_mover-1)]) == '♣':
                             print("\033[37m{0}. \033[30m{1}\n".format(1, baralho[carta_mover-3]))
-                        carta_a_empilhar = int(input("\033[37mDigite o número da sua escolha (1):"))+1
-                        print("")
+                        carta_a_empilhar = 2
                         
                     elif lista_movimentos_possiveis(baralho, carta_mover) == [1,3]:
                         if extrai_naipe(baralho[(carta_mover-1)]) == '♥' or extrai_naipe(baralho[(carta_mover-1)]) == '♦':
@@ -149,14 +147,17 @@ while j != 0:
             print("\033[37mNão há mais movimentos possíveis. Você perdeu :(\n")
             jogar_outra_vez = input("\033[37m Você quer jogar outra vez (s/n)?")
             if jogar_outra_vez == "n":
-                j-=1
+                j+=1
+                print("\n\033[37mFim!")
+                break
             else:
-                quit
+                break
 
-    print("\033[37m Você Ganhou!!\n")
-    jogar_outra_vez = input("\033[37m Você quer jogar outra vez (s/n)?")
-    if jogar_outra_vez == "n":
-        j -= 1
-    else:
-        continue
-print("\n\033[37mFim!")
+    if len(baralho) == 1:
+        print("\033[37m Você Ganhou!!\n")
+        jogar_outra_vez = input("\033[37m Você quer jogar outra vez (s/n)?")
+        if jogar_outra_vez == "n":
+            j += 1
+            print("\n\033[37mFim!")
+        else:
+            continue
